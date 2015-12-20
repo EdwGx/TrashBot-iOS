@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */; };
+		966286881C26DBA500CA3236 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966286871C26DBA500CA3236 /* JavaScriptCore.framework */; };
 		9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7AB1C24A32A00847227 /* AppDelegate.swift */; };
 		9685E7AE1C24A32A00847227 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7AD1C24A32A00847227 /* ViewController.swift */; };
 		9685E7B11C24A32B00847227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7AF1C24A32B00847227 /* Main.storyboard */; };
@@ -15,6 +17,11 @@
 		9685E7C11C24A33100847227 /* TrashBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7C01C24A33100847227 /* TrashBotTests.swift */; };
 		9685E7CC1C24A33100847227 /* TrashBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7CB1C24A33100847227 /* TrashBotUITests.swift */; };
 		9685E7DA1C24A94700847227 /* ProgrammingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7D91C24A94700847227 /* ProgrammingViewController.swift */; };
+		9685E7E01C24BDE100847227 /* backward.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DC1C24BDE100847227 /* backward.wav */; };
+		9685E7E11C24BDE100847227 /* forward.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DD1C24BDE100847227 /* forward.wav */; };
+		9685E7E21C24BDE100847227 /* left.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DE1C24BDE100847227 /* left.wav */; };
+		9685E7E31C24BDE100847227 /* right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DF1C24BDE100847227 /* right.wav */; };
+		9685E7E51C24C6C700847227 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9685E7E41C24C6C700847227 /* AVFoundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptManger.swift; sourceTree = "<group>"; };
+		966286871C26DBA500CA3236 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		9685E7A81C24A32A00847227 /* TrashBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrashBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9685E7AB1C24A32A00847227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9685E7AD1C24A32A00847227 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +58,11 @@
 		9685E7CB1C24A33100847227 /* TrashBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBotUITests.swift; sourceTree = "<group>"; };
 		9685E7CD1C24A33100847227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9685E7D91C24A94700847227 /* ProgrammingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammingViewController.swift; sourceTree = "<group>"; };
+		9685E7DC1C24BDE100847227 /* backward.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = backward.wav; sourceTree = "<group>"; };
+		9685E7DD1C24BDE100847227 /* forward.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = forward.wav; sourceTree = "<group>"; };
+		9685E7DE1C24BDE100847227 /* left.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = left.wav; sourceTree = "<group>"; };
+		9685E7DF1C24BDE100847227 /* right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = right.wav; sourceTree = "<group>"; };
+		9685E7E41C24C6C700847227 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				966286881C26DBA500CA3236 /* JavaScriptCore.framework in Frameworks */,
+				9685E7E51C24C6C700847227 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,6 +95,8 @@
 		9685E79F1C24A32800847227 = {
 			isa = PBXGroup;
 			children = (
+				966286871C26DBA500CA3236 /* JavaScriptCore.framework */,
+				9685E7E41C24C6C700847227 /* AVFoundation.framework */,
 				9685E7AA1C24A32A00847227 /* TrashBot */,
 				9685E7BF1C24A33100847227 /* TrashBotTests */,
 				9685E7CA1C24A33100847227 /* TrashBotUITests */,
@@ -99,8 +117,10 @@
 		9685E7AA1C24A32A00847227 /* TrashBot */ = {
 			isa = PBXGroup;
 			children = (
+				9685E7DB1C24BD9100847227 /* Audio */,
 				9685E7D91C24A94700847227 /* ProgrammingViewController.swift */,
 				9685E7AB1C24A32A00847227 /* AppDelegate.swift */,
+				966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */,
 				9685E7AD1C24A32A00847227 /* ViewController.swift */,
 				9685E7AF1C24A32B00847227 /* Main.storyboard */,
 				9685E7B21C24A32C00847227 /* Assets.xcassets */,
@@ -126,6 +146,17 @@
 				9685E7CD1C24A33100847227 /* Info.plist */,
 			);
 			path = TrashBotUITests;
+			sourceTree = "<group>";
+		};
+		9685E7DB1C24BD9100847227 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				9685E7DC1C24BDE100847227 /* backward.wav */,
+				9685E7DD1C24BDE100847227 /* forward.wav */,
+				9685E7DE1C24BDE100847227 /* left.wav */,
+				9685E7DF1C24BDE100847227 /* right.wav */,
+			);
+			name = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -196,6 +227,7 @@
 				TargetAttributes = {
 					9685E7A71C24A32900847227 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = VN5PBBVFWW;
 					};
 					9685E7BB1C24A33100847227 = {
 						CreatedOnToolsVersion = 7.2;
@@ -234,7 +266,11 @@
 			files = (
 				9685E7B61C24A32D00847227 /* LaunchScreen.storyboard in Resources */,
 				9685E7B31C24A32C00847227 /* Assets.xcassets in Resources */,
+				9685E7E11C24BDE100847227 /* forward.wav in Resources */,
+				9685E7E21C24BDE100847227 /* left.wav in Resources */,
+				9685E7E31C24BDE100847227 /* right.wav in Resources */,
 				9685E7B11C24A32B00847227 /* Main.storyboard in Resources */,
+				9685E7E01C24BDE100847227 /* backward.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +297,7 @@
 			files = (
 				9685E7DA1C24A94700847227 /* ProgrammingViewController.swift in Sources */,
 				9685E7AE1C24A32A00847227 /* ViewController.swift in Sources */,
+				966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */,
 				9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -401,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TrashBot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.candong.TrashBot;
@@ -412,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TrashBot/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.candong.TrashBot;

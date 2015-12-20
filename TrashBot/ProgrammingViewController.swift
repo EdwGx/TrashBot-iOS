@@ -6,4 +6,26 @@
 //  Copyright © 2015 Peiliang Guo. All rights reserved.
 //
 
-import Foundation
+import UIKit
+import AVFoundation
+
+class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate {
+    @IBOutlet weak var textView: UITextView!
+    
+    var javaScriptManger : TBJavaScriptManger?
+    var audioPlayer : AVAudioPlayer?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func run(sender: AnyObject) {
+        javaScriptManger = TBJavaScriptManger(script: textView.text)
+    }
+}
