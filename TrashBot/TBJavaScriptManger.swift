@@ -11,12 +11,20 @@ import JavaScriptCore
 
 class TBJavaScriptManger{
     let context = JSContext()
+    let queue = NSOperationQueue()
+    
     init(script: String){
-        let jsPrint: @convention(block) String -> Void = { output in
-            print(output)
-        }
-        context.setObject(unsafeBitCast(jsPrint, AnyObject.self), forKeyedSubscript: "print")
+        queue.qualityOfService = .UserInitiated
+        queue.name = "TBJavaScriptManger-Queue"
         
-        context.evaluateScript(script)
+        queue.addOperationWithBlock { () -> Void in
+            let jsPrint: @convention(block) String -> Void = { output in
+                print(output)
+            }
+            
+            self.context.setObject(unsafeBitCast(jsPrint, AnyObject.self), forKeyedSubscript: "print")
+            
+            self.context.evaluateScript(script)
+        }
     }
 }
