@@ -26,5 +26,6 @@ class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate {
     
     @IBAction func run(sender: AnyObject) {
         TBJavaScriptManger.sharedManger.reset(textView.text)
+        performSegueWithIdentifier("runScript", sender: nil)
     }
 }

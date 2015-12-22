@@ -16,20 +16,26 @@ enum TBJavaScriptMangerState {
 }
 
 protocol TBJavaScriptMangerDelegate {
-    func javaScriptManger(manger: TBJavaScriptManger, hasChangeStateTo: TBJavaScriptMangerState)
+    func javaScriptManger(manger: TBJavaScriptManger, hasChangTo state: TBJavaScriptMangerState)
 }
 
 class TBJavaScriptManger : NSObject {
     static let sharedManger = TBJavaScriptManger()
     var javaScriptContext : JSContext?
     let queue = NSOperationQueue()
-    var state = TBJavaScriptMangerState.Idle
+    var state = TBJavaScriptMangerState.Idle {
+        didSet {
+            delegate?.javaScriptManger(self, hasChangTo: state)
+        }
+    }
     
     let isCancelingSubscript = "_isCanceling"
     let stopGuardSubscript = "_stopGuard"
     
-    var stopGuardFunction : String;
-    var waitFunction : String;
+    var stopGuardFunction : String
+    var waitFunction : String
+    
+    var delegate : TBJavaScriptMangerDelegate?
     
     override init() {
         waitFunction = "function wait(time){\(stopGuardSubscript)();while(time > 0.25){time -= 0.25;_wait(0.25);\(stopGuardSubscript)();} _wait(time);\(stopGuardSubscript)();}"
@@ -42,35 +48,44 @@ class TBJavaScriptManger : NSObject {
     }
     
     func reset(script: String) {
-        self.performSelector(Selector("stopContext"), withObject: nil, afterDelay: 3.0)
         state = .Excuting
         
         javaScriptContext = JSContext()
         javaScriptContext!.exceptionHandler = { context, exception in
             NSLog("JS Error:\(exception)")
+            TBJavaScriptManger.sharedManger.state = .Idle
         }
         
         queue.addOperationWithBlock { () -> Void in
             let manger = TBJavaScriptManger.sharedManger
+            do {
+                let processedScript = try manger.injectStopGuard(script)
+                    
+                let jsPrint: @convention(block) String -> Void = { output in
+                    TBBot.sharedBot.display(string: output)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(jsPrint, AnyObject.self), forKeyedSubscript: "print")
                 
-            let jsPrint: @convention(block) String -> Void = { output in
-                NSLog(output)
+                let jsWait: @convention(block) Double -> Void = { ti in
+                    NSThread.sleepForTimeInterval(ti)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(jsWait, AnyObject.self), forKeyedSubscript: "_wait")
+                
+                let jsIsCanceling: @convention(block) Void -> Bool = {
+                    return (TBJavaScriptManger.sharedManger.state == .Canceling)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(jsIsCanceling, AnyObject.self), forKeyedSubscript: manger.isCancelingSubscript)
+                
+                manger.javaScriptContext!.evaluateScript(manger.waitFunction)
+                manger.javaScriptContext!.evaluateScript(manger.stopGuardFunction)
+                manger.javaScriptContext!.evaluateScript(processedScript)
+            } catch StopGuardInjectionError.InvalidSyntax {
+                NSLog("StopGuard:Invalid Syntax")
+            } catch StopGuardInjectionError.Unknown {
+                NSLog("StopGuard:Unknown")
+            } catch {
+                NSLog("Unknown")
             }
-            manger.javaScriptContext!.setObject(unsafeBitCast(jsPrint, AnyObject.self), forKeyedSubscript: "print")
-            
-            let jsWait: @convention(block) Double -> Void = { ti in
-                NSThread.sleepForTimeInterval(ti)
-            }
-            manger.javaScriptContext!.setObject(unsafeBitCast(jsWait, AnyObject.self), forKeyedSubscript: "_wait")
-            
-            let jsIsStopping: @convention(block) Void -> Bool = {
-                TBJavaScriptManger.sharedManger.state == .Canceling
-            }
-            manger.javaScriptContext!.setObject(unsafeBitCast(jsIsStopping, AnyObject.self), forKeyedSubscript: manger.isCancelingSubscript)
-            
-            manger.javaScriptContext!.evaluateScript(manger.waitFunction)
-            manger.javaScriptContext!.evaluateScript(manger.stopGuardFunction)
-            manger.javaScriptContext!.evaluateScript(script)
         }
     }
     
@@ -164,6 +179,6 @@ class TBJavaScriptManger : NSObject {
     }
     
     func stopContext(){
-        //context = nil
+        state = .Canceling
     }
 }

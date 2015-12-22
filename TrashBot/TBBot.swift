@@ -17,6 +17,7 @@ enum TBMotionDirection {
 }
 
 class TBBot : NSObject {
+    static let sharedBot = TBBot()
     var direction = TBMotionDirection.Stop
     
     override init() {
