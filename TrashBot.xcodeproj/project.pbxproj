@@ -24,6 +24,7 @@
 		9685E7E51C24C6C700847227 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9685E7E41C24C6C700847227 /* AVFoundation.framework */; };
 		9688EB851C28500800A80D81 /* TBJavaScriptMangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */; };
 		9688EB861C28505300A80D81 /* TBJavaScriptManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */; };
+		969C99F21C28D0A100FF5E4F /* TBBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F11C28D0A100FF5E4F /* TBBot.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		9685E7DF1C24BDE100847227 /* right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = right.wav; sourceTree = "<group>"; };
 		9685E7E41C24C6C700847227 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptMangerTests.swift; sourceTree = "<group>"; };
+		969C99F11C28D0A100FF5E4F /* TBBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBot.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +126,7 @@
 				9685E7D91C24A94700847227 /* ProgrammingViewController.swift */,
 				9685E7AB1C24A32A00847227 /* AppDelegate.swift */,
 				966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */,
+				969C99F11C28D0A100FF5E4F /* TBBot.swift */,
 				9685E7AD1C24A32A00847227 /* ViewController.swift */,
 				9685E7AF1C24A32B00847227 /* Main.storyboard */,
 				9685E7B21C24A32C00847227 /* Assets.xcassets */,
@@ -300,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9685E7DA1C24A94700847227 /* ProgrammingViewController.swift in Sources */,
+				969C99F21C28D0A100FF5E4F /* TBBot.swift in Sources */,
 				9685E7AE1C24A32A00847227 /* ViewController.swift in Sources */,
 				966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */,
 				9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */,
