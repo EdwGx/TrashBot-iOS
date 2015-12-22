@@ -12,7 +12,6 @@ import AVFoundation
 class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate {
     @IBOutlet weak var textView: UITextView!
     
-    var javaScriptManger : TBJavaScriptManger?
     var audioPlayer : AVAudioPlayer?
     
     override func viewDidLoad() {
@@ -26,6 +25,6 @@ class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate {
     }
     
     @IBAction func run(sender: AnyObject) {
-        javaScriptManger = TBJavaScriptManger(script: textView.text)
+        TBJavaScriptManger.sharedManger.reset(textView.text)
     }
 }

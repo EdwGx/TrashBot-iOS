@@ -22,6 +22,8 @@
 		9685E7E21C24BDE100847227 /* left.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DE1C24BDE100847227 /* left.wav */; };
 		9685E7E31C24BDE100847227 /* right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DF1C24BDE100847227 /* right.wav */; };
 		9685E7E51C24C6C700847227 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9685E7E41C24C6C700847227 /* AVFoundation.framework */; };
+		9688EB851C28500800A80D81 /* TBJavaScriptMangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */; };
+		9688EB861C28505300A80D81 /* TBJavaScriptManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +65,7 @@
 		9685E7DE1C24BDE100847227 /* left.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = left.wav; sourceTree = "<group>"; };
 		9685E7DF1C24BDE100847227 /* right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = right.wav; sourceTree = "<group>"; };
 		9685E7E41C24C6C700847227 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptMangerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				9685E7C01C24A33100847227 /* TrashBotTests.swift */,
+				9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */,
 				9685E7C21C24A33100847227 /* Info.plist */,
 			);
 			path = TrashBotTests;
@@ -306,7 +310,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9688EB851C28500800A80D81 /* TBJavaScriptMangerTests.swift in Sources */,
 				9685E7C11C24A33100847227 /* TrashBotTests.swift in Sources */,
+				9688EB861C28505300A80D81 /* TBJavaScriptManger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
