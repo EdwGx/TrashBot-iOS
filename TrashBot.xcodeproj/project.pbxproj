@@ -27,6 +27,8 @@
 		969C99F21C28D0A100FF5E4F /* TBBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F11C28D0A100FF5E4F /* TBBot.swift */; };
 		969C99F31C28F79300FF5E4F /* TBBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F11C28D0A100FF5E4F /* TBBot.swift */; };
 		969C99F51C28FAE500FF5E4F /* RuntimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */; };
+		96DE776A1C29A6FE00CAE881 /* ColorCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */; };
+		96DE776C1C29A76900CAE881 /* CaptureVideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +73,8 @@
 		9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptMangerTests.swift; sourceTree = "<group>"; };
 		969C99F11C28D0A100FF5E4F /* TBBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBot.swift; sourceTree = "<group>"; };
 		969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeViewController.swift; sourceTree = "<group>"; };
+		96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCaptureViewController.swift; sourceTree = "<group>"; };
+		96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureVideoPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +104,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		966976E11C2A46D2004498CD /* ColorCapture */ = {
+			isa = PBXGroup;
+			children = (
+				96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */,
+				96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */,
+			);
+			name = ColorCapture;
+			sourceTree = "<group>";
+		};
+		966976E21C2A46F1004498CD /* TBCore */ = {
+			isa = PBXGroup;
+			children = (
+				966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */,
+				969C99F11C28D0A100FF5E4F /* TBBot.swift */,
+			);
+			name = TBCore;
+			sourceTree = "<group>";
+		};
 		9685E79F1C24A32800847227 = {
 			isa = PBXGroup;
 			children = (
@@ -125,11 +147,11 @@
 		9685E7AA1C24A32A00847227 /* TrashBot */ = {
 			isa = PBXGroup;
 			children = (
+				966976E11C2A46D2004498CD /* ColorCapture */,
+				966976E21C2A46F1004498CD /* TBCore */,
 				9685E7DB1C24BD9100847227 /* Audio */,
 				9685E7D91C24A94700847227 /* ProgrammingViewController.swift */,
 				9685E7AB1C24A32A00847227 /* AppDelegate.swift */,
-				966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */,
-				969C99F11C28D0A100FF5E4F /* TBBot.swift */,
 				969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */,
 				9685E7AD1C24A32A00847227 /* ViewController.swift */,
 				9685E7AF1C24A32B00847227 /* Main.storyboard */,
@@ -307,10 +329,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9685E7DA1C24A94700847227 /* ProgrammingViewController.swift in Sources */,
+				96DE776C1C29A76900CAE881 /* CaptureVideoPreview.swift in Sources */,
 				969C99F21C28D0A100FF5E4F /* TBBot.swift in Sources */,
 				9685E7AE1C24A32A00847227 /* ViewController.swift in Sources */,
 				969C99F51C28FAE500FF5E4F /* RuntimeViewController.swift in Sources */,
 				966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */,
+				96DE776A1C29A6FE00CAE881 /* ColorCaptureViewController.swift in Sources */,
 				9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
