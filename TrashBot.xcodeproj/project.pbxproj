@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */; };
 		966286881C26DBA500CA3236 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966286871C26DBA500CA3236 /* JavaScriptCore.framework */; };
+		966976E41C2A47C7004498CD /* ColorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966976E31C2A47C7004498CD /* ColorInfoView.swift */; };
 		9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7AB1C24A32A00847227 /* AppDelegate.swift */; };
 		9685E7AE1C24A32A00847227 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7AD1C24A32A00847227 /* ViewController.swift */; };
 		9685E7B11C24A32B00847227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7AF1C24A32B00847227 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 /* Begin PBXFileReference section */
 		966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptManger.swift; sourceTree = "<group>"; };
 		966286871C26DBA500CA3236 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		966976E31C2A47C7004498CD /* ColorInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorInfoView.swift; sourceTree = "<group>"; };
 		9685E7A81C24A32A00847227 /* TrashBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrashBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9685E7AB1C24A32A00847227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9685E7AD1C24A32A00847227 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			children = (
 				96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */,
 				96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */,
+				966976E31C2A47C7004498CD /* ColorInfoView.swift */,
 			);
 			name = ColorCapture;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 				966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */,
 				96DE776A1C29A6FE00CAE881 /* ColorCaptureViewController.swift in Sources */,
 				9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */,
+				966976E41C2A47C7004498CD /* ColorInfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
