@@ -78,7 +78,6 @@ class RuntimeViewController: UIViewController, TBJavaScriptMangerDelegate, TBBot
     
     func appendTextToDisplay(string: String, tag: String) {
         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-            NSLog("[\(tag)]\(string)")
             self.displayTextView.text = self.displayTextView.text + "\n[\(tag)]\(string)"
             self.displayTextView.scrollRangeToVisible(NSMakeRange(self.displayTextView.text.characters.count - 2, 1))
         }

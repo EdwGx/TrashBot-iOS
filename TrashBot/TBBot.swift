@@ -80,6 +80,5 @@ class TBBot : NSObject {
     
     func display(string string: String){
         delegate?.bot(self, print: string)
-        NSLog(string)
     }
 }

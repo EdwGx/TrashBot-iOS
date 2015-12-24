@@ -184,7 +184,6 @@ class TBJavaScriptManger : NSObject {
     }
     
     func handleException(exception: JSValue) {
-        NSLog("JS Error:\(exception)")
         errorDescription = TBJavaScriptErrorDescription(description: "\(exception)", tag: "Runtime")
         state = .Error
     }
