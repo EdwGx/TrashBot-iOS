@@ -18,16 +18,16 @@
 		9685E7C11C24A33100847227 /* TrashBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7C01C24A33100847227 /* TrashBotTests.swift */; };
 		9685E7CC1C24A33100847227 /* TrashBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7CB1C24A33100847227 /* TrashBotUITests.swift */; };
 		9685E7DA1C24A94700847227 /* ProgrammingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7D91C24A94700847227 /* ProgrammingViewController.swift */; };
-		9685E7E01C24BDE100847227 /* backward.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DC1C24BDE100847227 /* backward.wav */; };
-		9685E7E11C24BDE100847227 /* forward.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DD1C24BDE100847227 /* forward.wav */; };
-		9685E7E21C24BDE100847227 /* left.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DE1C24BDE100847227 /* left.wav */; };
-		9685E7E31C24BDE100847227 /* right.wav in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7DF1C24BDE100847227 /* right.wav */; };
 		9685E7E51C24C6C700847227 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9685E7E41C24C6C700847227 /* AVFoundation.framework */; };
 		9688EB851C28500800A80D81 /* TBJavaScriptMangerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */; };
 		9688EB861C28505300A80D81 /* TBJavaScriptManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */; };
 		969C99F21C28D0A100FF5E4F /* TBBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F11C28D0A100FF5E4F /* TBBot.swift */; };
 		969C99F31C28F79300FF5E4F /* TBBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F11C28D0A100FF5E4F /* TBBot.swift */; };
 		969C99F51C28FAE500FF5E4F /* RuntimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */; };
+		969E64C51C2AE51B00081719 /* DualX-11.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C11C2AE51B00081719 /* DualX-11.aiff */; };
+		969E64C61C2AE51B00081719 /* DualX-12.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C21C2AE51B00081719 /* DualX-12.aiff */; };
+		969E64C71C2AE51B00081719 /* DualX-21.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C31C2AE51B00081719 /* DualX-21.aiff */; };
+		969E64C81C2AE51B00081719 /* DualX-22.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C41C2AE51B00081719 /* DualX-22.aiff */; };
 		96DE776A1C29A6FE00CAE881 /* ColorCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */; };
 		96DE776C1C29A76900CAE881 /* CaptureVideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */; };
 /* End PBXBuildFile section */
@@ -67,14 +67,14 @@
 		9685E7CB1C24A33100847227 /* TrashBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrashBotUITests.swift; sourceTree = "<group>"; };
 		9685E7CD1C24A33100847227 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9685E7D91C24A94700847227 /* ProgrammingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgrammingViewController.swift; sourceTree = "<group>"; };
-		9685E7DC1C24BDE100847227 /* backward.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = backward.wav; sourceTree = "<group>"; };
-		9685E7DD1C24BDE100847227 /* forward.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = forward.wav; sourceTree = "<group>"; };
-		9685E7DE1C24BDE100847227 /* left.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = left.wav; sourceTree = "<group>"; };
-		9685E7DF1C24BDE100847227 /* right.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = right.wav; sourceTree = "<group>"; };
 		9685E7E41C24C6C700847227 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptMangerTests.swift; sourceTree = "<group>"; };
 		969C99F11C28D0A100FF5E4F /* TBBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBot.swift; sourceTree = "<group>"; };
 		969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeViewController.swift; sourceTree = "<group>"; };
+		969E64C11C2AE51B00081719 /* DualX-11.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-11.aiff"; sourceTree = "<group>"; };
+		969E64C21C2AE51B00081719 /* DualX-12.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-12.aiff"; sourceTree = "<group>"; };
+		969E64C31C2AE51B00081719 /* DualX-21.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-21.aiff"; sourceTree = "<group>"; };
+		969E64C41C2AE51B00081719 /* DualX-22.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-22.aiff"; sourceTree = "<group>"; };
 		96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCaptureViewController.swift; sourceTree = "<group>"; };
 		96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureVideoPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -187,10 +187,10 @@
 		9685E7DB1C24BD9100847227 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				9685E7DC1C24BDE100847227 /* backward.wav */,
-				9685E7DD1C24BDE100847227 /* forward.wav */,
-				9685E7DE1C24BDE100847227 /* left.wav */,
-				9685E7DF1C24BDE100847227 /* right.wav */,
+				969E64C11C2AE51B00081719 /* DualX-11.aiff */,
+				969E64C21C2AE51B00081719 /* DualX-12.aiff */,
+				969E64C31C2AE51B00081719 /* DualX-21.aiff */,
+				969E64C41C2AE51B00081719 /* DualX-22.aiff */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -301,12 +301,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				9685E7B61C24A32D00847227 /* LaunchScreen.storyboard in Resources */,
+				969E64C71C2AE51B00081719 /* DualX-21.aiff in Resources */,
+				969E64C61C2AE51B00081719 /* DualX-12.aiff in Resources */,
 				9685E7B31C24A32C00847227 /* Assets.xcassets in Resources */,
-				9685E7E11C24BDE100847227 /* forward.wav in Resources */,
-				9685E7E21C24BDE100847227 /* left.wav in Resources */,
-				9685E7E31C24BDE100847227 /* right.wav in Resources */,
+				969E64C81C2AE51B00081719 /* DualX-22.aiff in Resources */,
+				969E64C51C2AE51B00081719 /* DualX-11.aiff in Resources */,
 				9685E7B11C24A32B00847227 /* Main.storyboard in Resources */,
-				9685E7E01C24BDE100847227 /* backward.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
