@@ -35,6 +35,9 @@ class TBJavaScriptManger : NSObject {
     var stopGuardFunction : String
     var waitFunction : String
     
+    var jsSetupFunctionAvailable = false
+    var jsLoopFunctionAvailable = false
+    
     var delegate : TBJavaScriptMangerDelegate?
     
     override init() {
@@ -60,25 +63,64 @@ class TBJavaScriptManger : NSObject {
             let manger = TBJavaScriptManger.sharedManger
             do {
                 let processedScript = try manger.injectStopGuard(script)
-                    
-                let jsPrint: @convention(block) String -> Void = { output in
-                    TBBot.sharedBot.display(string: output)
-                }
-                manger.javaScriptContext!.setObject(unsafeBitCast(jsPrint, AnyObject.self), forKeyedSubscript: "print")
                 
+                //Internal - _wait()
                 let jsWait: @convention(block) Double -> Void = { ti in
                     NSThread.sleepForTimeInterval(ti)
                 }
                 manger.javaScriptContext!.setObject(unsafeBitCast(jsWait, AnyObject.self), forKeyedSubscript: "_wait")
                 
+                //Internal - _isCanceling()
                 let jsIsCanceling: @convention(block) Void -> Bool = {
                     return (TBJavaScriptManger.sharedManger.state == .Canceling)
                 }
                 manger.javaScriptContext!.setObject(unsafeBitCast(jsIsCanceling, AnyObject.self), forKeyedSubscript: manger.isCancelingSubscript)
                 
+                //Public - print()
+                let jsPrint: @convention(block) String -> Void = { output in
+                    TBBot.sharedBot.display(string: output)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(jsPrint, AnyObject.self), forKeyedSubscript: "print")
+                
+                //Public - moveForward()
+                let moveForward: @convention(block) Void -> Void = {
+                    TBBot.sharedBot.update(direction: .Forward)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(moveForward, AnyObject.self), forKeyedSubscript: "moveForward")
+                
+                //Public - moveBackward()
+                let moveBackward: @convention(block) Void -> Void = {
+                    TBBot.sharedBot.update(direction: .Backward)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(moveBackward, AnyObject.self), forKeyedSubscript: "moveBackward")
+                
+                //Public - turnLeft()
+                let turnLeft: @convention(block) Void -> Void = {
+                    TBBot.sharedBot.update(direction: .TurnLeft)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(turnLeft, AnyObject.self), forKeyedSubscript: "turnLeft")
+                
+                //Public - turnRight()
+                let turnRight: @convention(block) Void -> Void = {
+                    TBBot.sharedBot.update(direction: .TurnRight)
+                }
+                manger.javaScriptContext!.setObject(unsafeBitCast(turnRight, AnyObject.self), forKeyedSubscript: "turnRight")
+                
+                
                 manger.javaScriptContext!.evaluateScript(manger.waitFunction)
                 manger.javaScriptContext!.evaluateScript(manger.stopGuardFunction)
                 manger.javaScriptContext!.evaluateScript(processedScript)
+                
+                manger.jsSetupFunctionAvailable = manger.javaScriptContext!.evaluateScript("typeof setup == 'function'").toBool()
+                manger.jsLoopFunctionAvailable = manger.javaScriptContext!.evaluateScript("typeof loop == 'function'").toBool()
+                
+                if manger.jsSetupFunctionAvailable {
+                    manger.javaScriptContext!.evaluateScript("setup")
+                }
+                
+                if manger.jsLoopFunctionAvailable {
+                    manger.queue.addOperation(TBJavaScriptLoopOperation())
+                }
             } catch StopGuardInjectionError.InvalidSyntax {
                 NSLog("StopGuard:Invalid Syntax")
             } catch StopGuardInjectionError.Unknown {
@@ -180,5 +222,19 @@ class TBJavaScriptManger : NSObject {
     
     func stopContext(){
         state = .Canceling
+    }
+}
+
+class TBJavaScriptLoopOperation: NSOperation {
+    override func main () {
+        let manger = TBJavaScriptManger.sharedManger
+        if manger.state == .Excuting {
+            let result = manger.javaScriptContext!.evaluateScript("loop")
+            if result.isBoolean && !result.toBool() {
+                manger.state = .Idle
+            } else {
+                manger.queue.addOperation(TBJavaScriptLoopOperation())
+            }
+        }
     }
 }
