@@ -9,12 +9,27 @@
 import Foundation
 import AVFoundation
 
-enum TBMotionDirection {
+enum TBMotionDirection: Int, CustomStringConvertible {
     case Stop
     case Forward
     case Backward
     case TurnLeft
     case TurnRight
+    
+    var description: String {
+        switch self {
+        case .Stop: return "Stop";
+        case .Forward: return "Forward";
+        case .Backward: return "Backward";
+        case .TurnLeft: return "TurnLeft";
+        case .TurnRight: return "TurnRight";
+        }
+    }
+}
+
+protocol TBBotDelegate {
+    func bot(bot: TBBot, print string: String)
+    func bot(bot: TBBot, directionHasChanged direction: TBMotionDirection )
 }
 
 class TBBot : NSObject {
@@ -24,8 +39,11 @@ class TBBot : NSObject {
     private var _audioPlayers = [TBMotionDirection:AVAudioPlayer]()
     private var _currentAudioPlayer: AVAudioPlayer?
     
+    var delegate: TBBotDelegate?
+    
     override init() {
         super.init()
+        /*
         do {
             _audioPlayers[.Forward] = try audioPlayerForFile("DualX-12")
             _audioPlayers[.Backward] = try audioPlayerForFile("DualX-21")
@@ -34,6 +52,7 @@ class TBBot : NSObject {
         } catch {
             NSLog("Error: \(error)")
         }
+        */
     }
     
     private func audioPlayerForFile(filename: String) throws  -> AVAudioPlayer {
@@ -44,7 +63,8 @@ class TBBot : NSObject {
     
     func update(direction direction: TBMotionDirection) {
         guard direction != _direction else { return }
-        
+        delegate?.bot(self, directionHasChanged: _direction)
+        /*
         if _currentAudioPlayer != nil {
             _currentAudioPlayer!.stop()
             _currentAudioPlayer!.currentTime = 0
@@ -55,9 +75,11 @@ class TBBot : NSObject {
             _currentAudioPlayer = _audioPlayers[direction]
             _currentAudioPlayer!.play()
         }
+        */
     }
     
     func display(string string: String){
+        delegate?.bot(self, print: string)
         NSLog(string)
     }
 }

@@ -116,7 +116,7 @@ print("+6");</string>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="textView" destination="8Gx-eW-HSG" id="vDP-5X-8Lm"/>
-                        <segue destination="KY8-Be-nf5" kind="presentation" identifier="runScript" id="3Z7-H7-xMn"/>
+                        <segue destination="KY8-Be-nf5" kind="showDetail" identifier="runScript" id="3Z7-H7-xMn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aZU-H8-iKa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -160,15 +160,33 @@ print("+6");</string>
                                     <action selector="stopJS:" destination="KY8-Be-nf5" eventType="touchUpInside" id="7CX-jd-FuY"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="sya-qu-VZA">
+                                <rect key="frame" x="0.0" y="20" width="600" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="rM9-Jt-4rf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="MJK-WX-YOs" firstAttribute="centerX" secondItem="ZE0-mU-7bu" secondAttribute="centerX" id="1xb-kr-Yhx"/>
+                            <constraint firstItem="sya-qu-VZA" firstAttribute="top" secondItem="vCg-ow-7Eb" secondAttribute="bottom" id="7JK-Sj-0ts"/>
+                            <constraint firstItem="sya-qu-VZA" firstAttribute="leading" secondItem="ZE0-mU-7bu" secondAttribute="leading" id="BXX-dx-2b3"/>
+                            <constraint firstAttribute="trailing" secondItem="sya-qu-VZA" secondAttribute="trailing" id="Ohc-Qw-BbT"/>
                             <constraint firstItem="MJK-WX-YOs" firstAttribute="centerY" secondItem="ZE0-mU-7bu" secondAttribute="centerY" id="xSi-Q3-KZh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="displayTextView" destination="sya-qu-VZA" id="sZt-3h-GUI"/>
+                        <outlet property="stopButton" destination="MJK-WX-YOs" id="kUj-tv-klh"/>
+                        <segue destination="Uvs-8i-V06" kind="unwind" identifier="finishScript" unwindAction="unwindToProgramming:" id="rur-V3-ijj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cov-u7-jSC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Uvs-8i-V06" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2228" y="350"/>
         </scene>
