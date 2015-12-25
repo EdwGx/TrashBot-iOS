@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate {
+class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate, CodeSuggestionViewDelegate {
     @IBOutlet weak var textView: UITextView!
     
     var audioPlayer : AVAudioPlayer?
@@ -17,11 +17,36 @@ class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let accessoryView = CodeSuggestionView(frame: CGRectMake(0,0,self.view.frame.width,0))
+        accessoryView.delegate = self
+        textView.inputAccessoryView = accessoryView
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillChangeFrame:"), name: UIKeyboardWillChangeFrameNotification, object: nil)
+    }
+    
+    func keyboardWillChangeFrame(notification: NSNotification){
+        let userInfo = notification.userInfo!
+        let duration = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber).doubleValue
+        let curve = UIViewAnimationCurve(rawValue: (userInfo[UIKeyboardAnimationCurveUserInfoKey] as! NSNumber).integerValue)!
+        let frame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: frame.size.height, right: 0)
+        
+        UIView.beginAnimations(nil, context: nil)
+        UIView.setAnimationDuration(duration)
+        UIView.setAnimationCurve(curve)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        
+        textView.contentInset = contentInsets
+        textView.scrollIndicatorInsets = contentInsets
+        
+        UIView.commitAnimations()
     }
     
     @IBAction func run(sender: AnyObject) {
@@ -31,5 +56,9 @@ class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate {
     
     @IBAction func unwindToProgramming(segue: UIStoryboardSegue) {
     
+    }
+    
+    func editingEndInCodeSuggestionView(view: CodeSuggestionView) {
+        textView.resignFirstResponder()
     }
 }

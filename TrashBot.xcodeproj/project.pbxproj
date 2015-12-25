@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9613521B1C2CE76C000C88E4 /* D11.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 961352171C2CE76C000C88E4 /* D11.aiff */; };
+		9613521C1C2CE76C000C88E4 /* D12.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 961352181C2CE76C000C88E4 /* D12.aiff */; };
+		9613521D1C2CE76C000C88E4 /* D21.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 961352191C2CE76C000C88E4 /* D21.aiff */; };
+		9613521E1C2CE76C000C88E4 /* D22.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 9613521A1C2CE76C000C88E4 /* D22.aiff */; };
+		961352201C2CEB62000C88E4 /* TBFileManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9613521F1C2CEB62000C88E4 /* TBFileManger.swift */; };
 		966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */; };
 		966286881C26DBA500CA3236 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966286871C26DBA500CA3236 /* JavaScriptCore.framework */; };
 		966976E41C2A47C7004498CD /* ColorInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966976E31C2A47C7004498CD /* ColorInfoView.swift */; };
@@ -24,10 +29,7 @@
 		969C99F21C28D0A100FF5E4F /* TBBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F11C28D0A100FF5E4F /* TBBot.swift */; };
 		969C99F31C28F79300FF5E4F /* TBBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F11C28D0A100FF5E4F /* TBBot.swift */; };
 		969C99F51C28FAE500FF5E4F /* RuntimeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */; };
-		969E64C51C2AE51B00081719 /* DualX-11.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C11C2AE51B00081719 /* DualX-11.aiff */; };
-		969E64C61C2AE51B00081719 /* DualX-12.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C21C2AE51B00081719 /* DualX-12.aiff */; };
-		969E64C71C2AE51B00081719 /* DualX-21.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C31C2AE51B00081719 /* DualX-21.aiff */; };
-		969E64C81C2AE51B00081719 /* DualX-22.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 969E64C41C2AE51B00081719 /* DualX-22.aiff */; };
+		96B0D57E1C2C916800D910BB /* CodeSuggestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96B0D57D1C2C916800D910BB /* CodeSuggestionView.swift */; };
 		96DE776A1C29A6FE00CAE881 /* ColorCaptureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */; };
 		96DE776C1C29A76900CAE881 /* CaptureVideoPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */; };
 /* End PBXBuildFile section */
@@ -50,6 +52,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		961352171C2CE76C000C88E4 /* D11.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = D11.aiff; sourceTree = "<group>"; };
+		961352181C2CE76C000C88E4 /* D12.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = D12.aiff; sourceTree = "<group>"; };
+		961352191C2CE76C000C88E4 /* D21.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = D21.aiff; sourceTree = "<group>"; };
+		9613521A1C2CE76C000C88E4 /* D22.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = D22.aiff; sourceTree = "<group>"; };
+		9613521F1C2CEB62000C88E4 /* TBFileManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBFileManger.swift; sourceTree = "<group>"; };
 		966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptManger.swift; sourceTree = "<group>"; };
 		966286871C26DBA500CA3236 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		966976E31C2A47C7004498CD /* ColorInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorInfoView.swift; sourceTree = "<group>"; };
@@ -71,10 +78,7 @@
 		9688EB841C28500800A80D81 /* TBJavaScriptMangerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBJavaScriptMangerTests.swift; sourceTree = "<group>"; };
 		969C99F11C28D0A100FF5E4F /* TBBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBBot.swift; sourceTree = "<group>"; };
 		969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuntimeViewController.swift; sourceTree = "<group>"; };
-		969E64C11C2AE51B00081719 /* DualX-11.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-11.aiff"; sourceTree = "<group>"; };
-		969E64C21C2AE51B00081719 /* DualX-12.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-12.aiff"; sourceTree = "<group>"; };
-		969E64C31C2AE51B00081719 /* DualX-21.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-21.aiff"; sourceTree = "<group>"; };
-		969E64C41C2AE51B00081719 /* DualX-22.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = "DualX-22.aiff"; sourceTree = "<group>"; };
+		96B0D57D1C2C916800D910BB /* CodeSuggestionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSuggestionView.swift; sourceTree = "<group>"; };
 		96DE77691C29A6FE00CAE881 /* ColorCaptureViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCaptureViewController.swift; sourceTree = "<group>"; };
 		96DE776B1C29A76900CAE881 /* CaptureVideoPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureVideoPreview.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */,
+				9613521F1C2CEB62000C88E4 /* TBFileManger.swift */,
 				969C99F11C28D0A100FF5E4F /* TBBot.swift */,
 			);
 			name = TBCore;
@@ -154,6 +159,7 @@
 				966976E21C2A46F1004498CD /* TBCore */,
 				9685E7DB1C24BD9100847227 /* Audio */,
 				9685E7D91C24A94700847227 /* ProgrammingViewController.swift */,
+				96B0D57D1C2C916800D910BB /* CodeSuggestionView.swift */,
 				9685E7AB1C24A32A00847227 /* AppDelegate.swift */,
 				969C99F41C28FAE500FF5E4F /* RuntimeViewController.swift */,
 				9685E7AD1C24A32A00847227 /* ViewController.swift */,
@@ -187,10 +193,10 @@
 		9685E7DB1C24BD9100847227 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
-				969E64C11C2AE51B00081719 /* DualX-11.aiff */,
-				969E64C21C2AE51B00081719 /* DualX-12.aiff */,
-				969E64C31C2AE51B00081719 /* DualX-21.aiff */,
-				969E64C41C2AE51B00081719 /* DualX-22.aiff */,
+				961352171C2CE76C000C88E4 /* D11.aiff */,
+				961352181C2CE76C000C88E4 /* D12.aiff */,
+				961352191C2CE76C000C88E4 /* D21.aiff */,
+				9613521A1C2CE76C000C88E4 /* D22.aiff */,
 			);
 			name = Audio;
 			sourceTree = "<group>";
@@ -300,12 +306,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9613521E1C2CE76C000C88E4 /* D22.aiff in Resources */,
 				9685E7B61C24A32D00847227 /* LaunchScreen.storyboard in Resources */,
-				969E64C71C2AE51B00081719 /* DualX-21.aiff in Resources */,
-				969E64C61C2AE51B00081719 /* DualX-12.aiff in Resources */,
 				9685E7B31C24A32C00847227 /* Assets.xcassets in Resources */,
-				969E64C81C2AE51B00081719 /* DualX-22.aiff in Resources */,
-				969E64C51C2AE51B00081719 /* DualX-11.aiff in Resources */,
+				9613521B1C2CE76C000C88E4 /* D11.aiff in Resources */,
+				9613521D1C2CE76C000C88E4 /* D21.aiff in Resources */,
+				9613521C1C2CE76C000C88E4 /* D12.aiff in Resources */,
 				9685E7B11C24A32B00847227 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,6 +344,8 @@
 				969C99F51C28FAE500FF5E4F /* RuntimeViewController.swift in Sources */,
 				966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */,
 				96DE776A1C29A6FE00CAE881 /* ColorCaptureViewController.swift in Sources */,
+				961352201C2CEB62000C88E4 /* TBFileManger.swift in Sources */,
+				96B0D57E1C2C916800D910BB /* CodeSuggestionView.swift in Sources */,
 				9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */,
 				966976E41C2A47C7004498CD /* ColorInfoView.swift in Sources */,
 			);

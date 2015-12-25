@@ -37,11 +37,7 @@ class TBJavaScriptManger : NSObject {
     static let sharedManger = TBJavaScriptManger()
     var javaScriptContext : JSContext?
     let queue = NSOperationQueue()
-    var state = TBJavaScriptMangerState.Idle {
-        didSet {
-            delegate?.javaScriptManger(self, hasChangeTo: state)
-        }
-    }
+    var state = TBJavaScriptMangerState.Idle
     
     var errorDescription: TBJavaScriptErrorDescription?
     
@@ -53,6 +49,8 @@ class TBJavaScriptManger : NSObject {
     
     var jsSetupFunctionAvailable = false
     var jsLoopFunctionAvailable = false
+    
+    var authorizedScriptExcution = false
     
     var rawScript: String?
     var processedScript: String?
@@ -72,6 +70,7 @@ class TBJavaScriptManger : NSObject {
     func loadScript(script: String) {
         if state == .Idle {
             state = .LoadingScript
+           notifyDelegate()
             javaScriptContext = nil
             rawScript = script
             processedScript = nil
@@ -83,9 +82,20 @@ class TBJavaScriptManger : NSObject {
     
     func excuteScript() {
         if state == .Ready {
+            state = .Executing
+            notifyDelegate()
             queue.addOperation(TBJavaScriptSetupOperation())
         } else {
             fatalError("JS only can be excuted when manger is ready")
+        }
+    }
+    
+    func authorizeScriptExcution() {
+        if queue.operationCount == 0 && state == .Ready {
+            authorizedScriptExcution = false
+            self.excuteScript()
+        } else {
+            authorizedScriptExcution = true
         }
     }
     
@@ -179,13 +189,19 @@ class TBJavaScriptManger : NSObject {
         return insertFlags
     }
     
+    func notifyDelegate() {
+        delegate?.javaScriptManger(self, hasChangeTo: state)
+    }
+    
     func stopContext(){
         state = .Canceling
+        notifyDelegate()
     }
     
     func handleException(exception: JSValue) {
         errorDescription = TBJavaScriptErrorDescription(description: "\(exception)", tag: "Runtime")
         state = .Error
+        notifyDelegate()
     }
 }
 
@@ -198,12 +214,18 @@ class TBJavaScriptLoopOperation: NSOperation {
     override func main () {
         let manger = TBJavaScriptManger.sharedManger
         if manger.state == .Executing {
-            let result = manger.javaScriptContext!.evaluateScript("loop")
+            let result = manger.javaScriptContext!.evaluateScript("loop()")
             if result.isBoolean && !result.toBool() {
+                TBBot.sharedBot.reset()
                 manger.state = .Idle
+                manger.notifyDelegate()
             } else {
                 manger.queue.addOperation(TBJavaScriptLoopOperation())
             }
+        } else {
+            TBBot.sharedBot.reset()
+            manger.state = .Idle
+            manger.notifyDelegate()
         }
     }
 }
@@ -216,14 +238,17 @@ class TBJavaScriptLoadOperation: NSOperation {
         } catch TBJavaScriptManger.StopGuardInjectionError.InvalidSyntax {
             manger.errorDescription = TBJavaScriptErrorDescription(description: "Invalid Syntax", tag: "Complie")
             manger.state = .Error
+            manger.notifyDelegate()
             return
         } catch TBJavaScriptManger.StopGuardInjectionError.Unknown {
             manger.errorDescription = TBJavaScriptErrorDescription(description: "Injection Error", tag: "Complie")
             manger.state = .Error
+            manger.notifyDelegate()
             return
         } catch {
             manger.errorDescription = TBJavaScriptErrorDescription(description: "Unknown Error: \(error)", tag: "Complie")
             manger.state = .Error
+            manger.notifyDelegate()
             return
         }
         
@@ -275,19 +300,30 @@ class TBJavaScriptLoadOperation: NSOperation {
         }
         context.setObject(unsafeBitCast(turnRight, AnyObject.self), forKeyedSubscript: "turnRight")
         
+        //Public - turnRight()
+        let stopMotors: @convention(block) Void -> Void = {
+            TBBot.sharedBot.update(direction: .Stop)
+        }
+        context.setObject(unsafeBitCast(stopMotors, AnyObject.self), forKeyedSubscript: "stopMotors")
+        
         context.evaluateScript(manger.waitFunction)
         context.evaluateScript(manger.stopGuardFunction)
         
         manger.javaScriptContext = context
         
         manger.state = .Ready
+        manger.notifyDelegate()
+        
+        if manger.authorizedScriptExcution {
+            manger.authorizedScriptExcution = false
+            manger.excuteScript()
+        }
     }
 }
 
 class TBJavaScriptSetupOperation: NSOperation {
     override func main () {
         let manger = TBJavaScriptManger.sharedManger
-        manger.state = .Executing
         manger.javaScriptContext!.evaluateScript(manger.processedScript!)
         
         manger.jsSetupFunctionAvailable = manger.javaScriptContext!.evaluateScript("typeof setup == 'function'").toBool()
@@ -295,11 +331,14 @@ class TBJavaScriptSetupOperation: NSOperation {
         
         if manger.jsSetupFunctionAvailable && manger.state == .Executing {
             manger.javaScriptContext!.evaluateScript("setup()")
-            if manger.jsLoopFunctionAvailable {
-                manger.queue.addOperation(TBJavaScriptLoopOperation())
-            }
+        }
+        
+        if manger.jsLoopFunctionAvailable {
+            manger.queue.addOperation(TBJavaScriptLoopOperation())
         } else {
+            TBBot.sharedBot.reset()
             manger.state = .Idle
+            manger.notifyDelegate()
         }
     }
 }

@@ -18,12 +18,10 @@ class RuntimeViewController: UIViewController, TBJavaScriptMangerDelegate, TBBot
         // Do any additional setup after loading the view, typically from a nib.
         let manger = TBJavaScriptManger.sharedManger
         manger.delegate = self
+        manger.authorizeScriptExcution()
+        
         TBBot.sharedBot.delegate = self
         self.stopButton.enabled = false
-        
-        if manger.state != .Idle {
-            javaScriptManger(manger, hasChangeTo: manger.state)
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -48,13 +46,13 @@ class RuntimeViewController: UIViewController, TBJavaScriptMangerDelegate, TBBot
     
     func javaScriptManger(manger: TBJavaScriptManger, hasChangeTo state: TBJavaScriptMangerState) {
         appendTextToDisplay(state.description, tag: "JS")
+        NSLog("Delegate:\(state)")
         switch state {
         case .Idle:
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.stopButton.setTitle("Done", forState: .Normal)
             }
-        case .Ready:
-            manger.excuteScript()
+        case .Executing:
             dispatch_async(dispatch_get_main_queue()) { () -> Void in
                 self.stopButton.enabled = true
             }
@@ -64,7 +62,8 @@ class RuntimeViewController: UIViewController, TBJavaScriptMangerDelegate, TBBot
             }
             let errorDescription = manger.errorDescription!
             appendTextToDisplay(errorDescription.description, tag: "Error-\(errorDescription.tag)")
-        default: break
+        default:
+            break
         }
     }
     

@@ -32,7 +32,7 @@ protocol TBBotDelegate {
     func bot(bot: TBBot, directionHasChanged direction: TBMotionDirection )
 }
 
-class TBBot : NSObject {
+class TBBot : NSObject, AVAudioPlayerDelegate {
     static let sharedBot = TBBot()
     private var _direction = TBMotionDirection.Stop
     
@@ -43,16 +43,14 @@ class TBBot : NSObject {
     
     override init() {
         super.init()
-        /*
         do {
-            _audioPlayers[.Forward] = try audioPlayerForFile("DualX-12")
-            _audioPlayers[.Backward] = try audioPlayerForFile("DualX-21")
-            _audioPlayers[.TurnLeft] = try audioPlayerForFile("DualX-11")
-            _audioPlayers[.TurnRight] = try audioPlayerForFile("DualX-22")
+            _audioPlayers[.Forward] = try audioPlayerForFile("D21")
+            _audioPlayers[.Backward] = try audioPlayerForFile("D12")
+            _audioPlayers[.TurnLeft] = try audioPlayerForFile("D11")
+            _audioPlayers[.TurnRight] = try audioPlayerForFile("D22")
         } catch {
             NSLog("Error: \(error)")
         }
-        */
     }
     
     private func audioPlayerForFile(filename: String) throws  -> AVAudioPlayer {
@@ -62,20 +60,30 @@ class TBBot : NSObject {
     }
     
     func update(direction direction: TBMotionDirection) {
-        guard direction != _direction else { return }
+        if direction != _direction {
+            _direction = direction
+        } else {
+            return
+        }
         delegate?.bot(self, directionHasChanged: _direction)
-        /*
+        
         if _currentAudioPlayer != nil {
-            _currentAudioPlayer!.stop()
-            _currentAudioPlayer!.currentTime = 0
+            let audioPlayer = _currentAudioPlayer!
+            audioPlayer.stop()
             _currentAudioPlayer = nil
         }
         
         if direction != .Stop {
-            _currentAudioPlayer = _audioPlayers[direction]
-            _currentAudioPlayer!.play()
+            let audioPlayer = _audioPlayers[direction]!
+            _currentAudioPlayer = audioPlayer
+             audioPlayer.play()
         }
-        */
+    }
+    
+    func reset(){
+        _direction = .Stop
+        _currentAudioPlayer?.stop()
+        _currentAudioPlayer = nil
     }
     
     func display(string string: String){
