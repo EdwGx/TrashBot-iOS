@@ -9,8 +9,14 @@
 import UIKit
 import AVFoundation
 
+protocol CaptureVideoPreviewDelegate {
+    func captureColorInCaptureDevicePointOfInterest(point: CGPoint)
+}
+
 class CaptureVideoPreview: UIView {
     var previewLayer: AVCaptureVideoPreviewLayer?
+    var delegate: CaptureVideoPreviewDelegate?
+    
     var captureSession: AVCaptureSession? {
         didSet {
             if previewLayer == nil {
@@ -22,8 +28,16 @@ class CaptureVideoPreview: UIView {
         }
     }
     
-    override func layoutSublayersOfLayer(layer: CALayer) {
-        super.layoutSublayersOfLayer(layer)
+    override func layoutSubviews() {
+        super.layoutSubviews()
         previewLayer?.frame = self.bounds
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+        
+        let touch = touches.first!
+        let position = previewLayer?.captureDevicePointOfInterestForPoint(touch.locationInView(self))
+        self.delegate?.captureColorInCaptureDevicePointOfInterest(position!)
     }
 }

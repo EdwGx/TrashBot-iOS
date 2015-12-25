@@ -13,6 +13,7 @@ class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate, CodeS
     @IBOutlet weak var textView: UITextView!
     
     var audioPlayer : AVAudioPlayer?
+    var script: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate, CodeS
         let accessoryView = CodeSuggestionView(frame: CGRectMake(0,0,self.view.frame.width,0))
         accessoryView.delegate = self
         textView.inputAccessoryView = accessoryView
+        textView.text = script
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,6 +58,10 @@ class ProgrammingViewController : UIViewController, AVAudioPlayerDelegate, CodeS
     
     @IBAction func unwindToProgramming(segue: UIStoryboardSegue) {
     
+    }
+    
+    @IBAction func saveFile(send: AnyObject) {
+        TBFileManger.sharedManger.saveFile(self.title!, contents: textView.text)
     }
     
     func editingEndInCodeSuggestionView(view: CodeSuggestionView) {
