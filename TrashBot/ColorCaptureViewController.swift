@@ -111,7 +111,7 @@ class ColorCaptureViewController: UIViewController, CaptureVideoPreviewDelegate 
         let color = image.getPixelColorAtLocation(CGPointMake(pX,pY))
         
         let labeledImage: UIImage
-        if let objectRect = downSizedImage.estimateRectForColor(color!, maxDistance: 0.14) {
+        if let objectRect = downSizedImage.estimateRectForColor(color!, maxDistance: 80.0) {
             let gY = objectRect.center.x * image.size.height / downSizedImage.size.height
             let gX = image.size.width - (objectRect.center.y * image.size.width / downSizedImage.size.width)
             
@@ -122,9 +122,8 @@ class ColorCaptureViewController: UIViewController, CaptureVideoPreviewDelegate 
             trueRect.origin.x = gX - trueRect.size.width/2
             trueRect.origin.y = gY - trueRect.size.height/2
             
-            
-            
             labeledImage = image.imageByDrawingRectangle(trueRect, tap: CGPoint(x: x, y: y), cen: CGPoint(x: gX, y: gY))
+            print("\(downSizedImage.estimateRelativePositionForColor(color!, maxDistance: 80.0)!)")
         } else {
             labeledImage = image
         }

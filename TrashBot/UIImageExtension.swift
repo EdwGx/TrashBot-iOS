@@ -273,7 +273,7 @@ extension  UIImage {
         return (CGBitmapContextCreateImage(context).flatMap { UIImage(CGImage: $0, scale: self.scale,orientation: self.imageOrientation) })!
     }
     
-    func estimateRectForColor(color: UIColor, var maxDistance: Double) -> (center: CGPoint, xStd: CGFloat, yStd: CGFloat)? {
+    func estimateRectForColor(color: UIColor, maxDistance: Double) -> (center: CGPoint, xStd: CGFloat, yStd: CGFloat)? {
         var fRed : CGFloat = 0
         var fGreen : CGFloat = 0
         var fBlue : CGFloat = 0
@@ -284,9 +284,6 @@ extension  UIImage {
         let tRed = Int(fRed * 255.0)
         let tGreen = Int(fGreen * 255.0)
         let tBlue = Int(fBlue * 255.0)
-        
-        maxDistance *= sqrt(pow(255.0,2.0)*3)
-        maxDistance = pow(maxDistance,2.0)
         
         let inImage:CGImageRef = self.CGImage!
         let context = self.createARGBBitmapContext(inImage)
@@ -316,10 +313,11 @@ extension  UIImage {
             for var y = 0; y < Int(pixelsHigh) ; y++ {
                 let offset = 4*((Int(pixelsWide) * Int(y)) + Int(x))
                 
-                var distance = 0.0
-                distance += pow(Double(Int(dataType[offset+1]) - tRed),2.0)
-                distance += pow(Double(Int(dataType[offset+2]) - tGreen),2.0)
-                distance += pow(Double(Int(dataType[offset+3]) - tBlue),2.0)
+                let rmean = (tRed + Int(dataType[offset+1])) / 2
+                let r = tRed - Int(dataType[offset+1])
+                let g = tGreen - Int(dataType[offset+2])
+                let b = tBlue - Int(dataType[offset+3])
+                let distance = sqrt(Double((((512+rmean)*r*r)>>8) + 4*g*g + (((767-rmean)*b*b)>>8)))
                 
                 if distance < maxDistance {
                     xArrays.append(Double(x))
@@ -329,7 +327,7 @@ extension  UIImage {
             }
         }
         
-        if posCountI * 20 > pixelsWide * pixelsHigh {
+        if posCountI * 100 > pixelsWide * pixelsHigh {
             let posCount = Double(posCountI)
             
             let xAvg = xArrays.reduce(0.0, combine: +) / posCount
@@ -350,6 +348,14 @@ extension  UIImage {
             yStd = sqrt(yStd)
             
             return (center: CGPointMake(CGFloat(xAvg), CGFloat(yAvg)), xStd: CGFloat(xStd), yStd: CGFloat(yStd))
+        } else {
+            return nil
+        }
+    }
+    
+    func estimateRelativePositionForColor(color: UIColor, maxDistance: Double) -> CGPoint? {
+        if let rect = self.estimateRectForColor(color, maxDistance: maxDistance) {
+            return CGPoint(x: ((1.0 - (rect.center.y / self.size.width)) - 0.5) * 2.0, y: ((rect.center.x / self.size.height) - 0.5) * -2.0)
         } else {
             return nil
         }
