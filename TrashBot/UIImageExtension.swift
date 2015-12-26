@@ -280,7 +280,7 @@ extension  UIImage {
         var fAlpha: CGFloat = 0
         
         color.getRed(&fRed, green: &fGreen, blue: &fBlue, alpha: &fAlpha)
-
+        
         let tRed = Int(fRed * 255.0)
         let tGreen = Int(fGreen * 255.0)
         let tBlue = Int(fBlue * 255.0)
@@ -307,8 +307,6 @@ extension  UIImage {
         var avgRed = 0.0
         var avgGreen = 0.0
         var avgBlue = 0.0
-        
-        var kDistance = 10000.0
         
         // Now we can get a pointer to the image data associated with the bitmap
         // context.
@@ -337,76 +335,14 @@ extension  UIImage {
             }
         }
         
-        let posCount = Double(posCountI)
-        
-        var xAvg = xArrays.reduce(0.0, combine: +) / posCount
-        var yAvg = yArrays.reduce(0.0, combine: +) / posCount
-        
-        var xStd = 0.0
-        var yStd = 0.0
-        
-        for i in 0..<xArrays.count {
-            xStd += pow((xArrays[i] - xAvg),2)
-            yStd += pow((yArrays[i] - yAvg),2)
-        }
-        
-        xArrays.removeAll(keepCapacity: true)
-        yArrays.removeAll(keepCapacity: true)
-        
-        xStd /= posCount
-        yStd /= posCount
-        
-        xStd = sqrt(xStd)
-        yStd = sqrt(yStd)
-        
-        avgRed /= posCount
-        avgGreen /= posCount
-        avgBlue /= posCount
-        
-        let halfMax = maxDistance / 2.0
-        
-        let ntRed = max(min(Int(avgRed), 255), 0)
-        let ntGreen = max(min(Int(avgGreen), 255), 0)
-        let ntBlue = max(min(Int(avgBlue), 255), 0)
-        
-        posCountI = 0
-        
-        let xRange = max(Int(floor(xAvg - xStd * 1.5)),0)..<min(Int(ceil(xAvg + xStd * 1.5)),Int(pixelsWide))
-        for x in  xRange {
-            let yRange = max(Int(floor(yAvg - yStd * 1.5)),0)..<min(Int(ceil(yAvg + yStd * 1.5)),Int(pixelsHigh))
-            for y in yRange {
-                let offset = 4*((Int(pixelsWide) * Int(y)) + Int(x))
-                
-                let rmean = (ntRed + Int(dataType[offset+1])) / 2
-                let r = ntRed - Int(dataType[offset+1])
-                let g = ntGreen - Int(dataType[offset+2])
-                let b = ntBlue - Int(dataType[offset+3])
-                let distance = sqrt(Double((((512+rmean)*r*r)>>8) + 4*g*g + (((767-rmean)*b*b)>>8)))
-                
-                if distance < halfMax {
-                    xArrays.append(Double(x))
-                    yArrays.append(Double(y))
-                    posCountI += 1
-                    
-                    avgRed += Double(dataType[offset+1])
-                    avgGreen += Double(dataType[offset+2])
-                    avgBlue += Double(dataType[offset+3])
-                }
-                
-                if distance < kDistance {
-                    kDistance = distance
-                }
-            }
-        }
-        
         if posCountI * 100 > pixelsWide * pixelsHigh {
             let posCount = Double(posCountI)
             
-            xAvg = xArrays.reduce(0.0, combine: +) / posCount
-            yAvg = yArrays.reduce(0.0, combine: +) / posCount
+            let xAvg = xArrays.reduce(0.0, combine: +) / posCount
+            let yAvg = yArrays.reduce(0.0, combine: +) / posCount
             
-            xStd = 0.0
-            yStd = 0.0
+            var xStd = 0.0
+            var yStd = 0.0
             
             for i in 0..<posCountI {
                 xStd += pow((xArrays[i] - xAvg),2)
