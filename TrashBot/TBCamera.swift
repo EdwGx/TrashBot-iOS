@@ -23,30 +23,30 @@ class TBCamera: NSObject {
     
     func setup() {
         authorized = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo) ==  AVAuthorizationStatus.Authorized
-        if (authorized) {
-            let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-            
-            do {
-                let input = try AVCaptureDeviceInput(device: captureDevice)
-                self.captureSession.addInput(input as AVCaptureDeviceInput)
+        if (authorized && !didSetup) {
+            dispatch_sync(dispatch_get_main_queue(), { () -> Void in
+                let captureDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
                 
-                self.stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
-                
-                if self.captureSession.canAddOutput(self.stillImageOutput) {
-                    self.captureSession.addOutput(self.stillImageOutput)
+                do {
+                    let input = try AVCaptureDeviceInput(device: captureDevice)
+                    self.captureSession.addInput(input as AVCaptureDeviceInput)
+                    
+                    self.stillImageOutput.outputSettings = [AVVideoCodecKey: AVVideoCodecJPEG]
+                    
+                    if self.captureSession.canAddOutput(self.stillImageOutput) {
+                        self.captureSession.addOutput(self.stillImageOutput)
+                    }
+                } catch {
+                    NSLog("\(error)")
                 }
-            } catch {
-                NSLog("\(error)")
-            }
-            
+            })
+            self.captureSession.startRunning()
             didSetup = true
         }
     }
     
     func captureColorObject(hex: String) -> CGRect? {
         if (authorized) {
-            self.captureSession.startRunning()
-            
             let sem: dispatch_semaphore_t = dispatch_semaphore_create(0)
             
             self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo), completionHandler: {[weak self] (imageDataSampleBuffer, error) -> Void in
@@ -59,13 +59,17 @@ class TBCamera: NSObject {
             
             dispatch_semaphore_wait(sem, DISPATCH_TIME_FOREVER)
             
-            self.captureSession.stopRunning()
-            
             if self.capturedImage != nil {
                 let downSizedImage = self.capturedImage!.downsizeImageByScale(8)
-                return downSizedImage.estimateRelativePositionForColor(UIColor(hexString: hex), maxDistance: 80.0)
+                return downSizedImage.estimateRelativePositionForColor(UIColor(hexString: hex), maxDistance: 200.0)
             }
         }
         return nil
+    }
+    
+    func stopSession() {
+        if self.captureSession.running {
+            self.captureSession.stopRunning()
+        }
     }
 }

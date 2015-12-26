@@ -203,6 +203,11 @@ class TBJavaScriptManger : NSObject {
         state = .Error
         notifyDelegate()
     }
+    
+    func cleanUp() {
+        TBBot.sharedBot.reset()
+        TBCamera.sharedCamera.stopSession()
+    }
 }
 
 struct TBJavaScriptErrorDescription {
@@ -216,14 +221,14 @@ class TBJavaScriptLoopOperation: NSOperation {
         if manger.state == .Executing {
             let result = manger.javaScriptContext!.evaluateScript("loop()")
             if result.isBoolean && !result.toBool() {
-                TBBot.sharedBot.reset()
+                manger.cleanUp()
                 manger.state = .Idle
                 manger.notifyDelegate()
             } else {
                 manger.queue.addOperation(TBJavaScriptLoopOperation())
             }
         } else {
-            TBBot.sharedBot.reset()
+            manger.cleanUp()
             manger.state = .Idle
             manger.notifyDelegate()
         }
@@ -355,7 +360,7 @@ class TBJavaScriptSetupOperation: NSOperation {
         if manger.jsLoopFunctionAvailable {
             manger.queue.addOperation(TBJavaScriptLoopOperation())
         } else {
-            TBBot.sharedBot.reset()
+            manger.cleanUp()
             manger.state = .Idle
             manger.notifyDelegate()
         }

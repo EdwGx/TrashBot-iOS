@@ -46,7 +46,6 @@ class RuntimeViewController: UIViewController, TBJavaScriptMangerDelegate, TBBot
     
     func javaScriptManger(manger: TBJavaScriptManger, hasChangeTo state: TBJavaScriptMangerState) {
         appendTextToDisplay(state.description, tag: "JS")
-        NSLog("Delegate:\(state)")
         switch state {
         case .Idle:
             dispatch_async(dispatch_get_main_queue()) { () -> Void in

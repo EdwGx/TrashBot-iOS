@@ -273,7 +273,7 @@ extension  UIImage {
         return (CGBitmapContextCreateImage(context).flatMap { UIImage(CGImage: $0, scale: self.scale,orientation: self.imageOrientation) })!
     }
     
-    func estimateRectForColor(color: UIColor, maxDistance: Double) -> (center: CGPoint, xStd: CGFloat, yStd: CGFloat)? {
+    func estimateRectForColor(color: UIColor, maxDistance: Double) -> (center: CGPoint, xStd: CGFloat, yStd: CGFloat, color: UIColor)? {
         var fRed : CGFloat = 0
         var fGreen : CGFloat = 0
         var fBlue : CGFloat = 0
@@ -304,6 +304,12 @@ extension  UIImage {
         var yArrays = [Double]()
         var posCountI = 0
         
+        var avgRed = 0.0
+        var avgGreen = 0.0
+        var avgBlue = 0.0
+        
+        var kDistance = 10000.0
+        
         // Now we can get a pointer to the image data associated with the bitmap
         // context.
         let data = CGBitmapContextGetData(context)
@@ -323,6 +329,72 @@ extension  UIImage {
                     xArrays.append(Double(x))
                     yArrays.append(Double(y))
                     posCountI += 1
+                    
+                    avgRed += Double(dataType[offset+1])
+                    avgGreen += Double(dataType[offset+2])
+                    avgBlue += Double(dataType[offset+3])
+                }
+            }
+        }
+        
+        let posCount = Double(posCountI)
+        
+        var xAvg = xArrays.reduce(0.0, combine: +) / posCount
+        var yAvg = yArrays.reduce(0.0, combine: +) / posCount
+        
+        var xStd = 0.0
+        var yStd = 0.0
+        
+        for i in 0..<xArrays.count {
+            xStd += pow((xArrays[i] - xAvg),2)
+            yStd += pow((yArrays[i] - yAvg),2)
+        }
+        
+        xArrays.removeAll(keepCapacity: true)
+        yArrays.removeAll(keepCapacity: true)
+        
+        xStd /= posCount
+        yStd /= posCount
+        
+        xStd = sqrt(xStd)
+        yStd = sqrt(yStd)
+        
+        avgRed /= posCount
+        avgGreen /= posCount
+        avgBlue /= posCount
+        
+        let halfMax = maxDistance / 2.0
+        
+        let ntRed = max(min(Int(avgRed), 255), 0)
+        let ntGreen = max(min(Int(avgGreen), 255), 0)
+        let ntBlue = max(min(Int(avgBlue), 255), 0)
+        
+        posCountI = 0
+        
+        let xRange = max(Int(floor(xAvg - xStd * 1.5)),0)..<min(Int(ceil(xAvg + xStd * 1.5)),Int(pixelsWide))
+        for x in  xRange {
+            let yRange = max(Int(floor(yAvg - yStd * 1.5)),0)..<min(Int(ceil(yAvg + yStd * 1.5)),Int(pixelsHigh))
+            for y in yRange {
+                let offset = 4*((Int(pixelsWide) * Int(y)) + Int(x))
+                
+                let rmean = (ntRed + Int(dataType[offset+1])) / 2
+                let r = ntRed - Int(dataType[offset+1])
+                let g = ntGreen - Int(dataType[offset+2])
+                let b = ntBlue - Int(dataType[offset+3])
+                let distance = sqrt(Double((((512+rmean)*r*r)>>8) + 4*g*g + (((767-rmean)*b*b)>>8)))
+                
+                if distance < halfMax {
+                    xArrays.append(Double(x))
+                    yArrays.append(Double(y))
+                    posCountI += 1
+                    
+                    avgRed += Double(dataType[offset+1])
+                    avgGreen += Double(dataType[offset+2])
+                    avgBlue += Double(dataType[offset+3])
+                }
+                
+                if distance < kDistance {
+                    kDistance = distance
                 }
             }
         }
@@ -330,13 +402,13 @@ extension  UIImage {
         if posCountI * 100 > pixelsWide * pixelsHigh {
             let posCount = Double(posCountI)
             
-            let xAvg = xArrays.reduce(0.0, combine: +) / posCount
-            let yAvg = yArrays.reduce(0.0, combine: +) / posCount
+            xAvg = xArrays.reduce(0.0, combine: +) / posCount
+            yAvg = yArrays.reduce(0.0, combine: +) / posCount
             
-            var xStd = 0.0
-            var yStd = 0.0
+            xStd = 0.0
+            yStd = 0.0
             
-            for i in 0..<xArrays.count {
+            for i in 0..<posCountI {
                 xStd += pow((xArrays[i] - xAvg),2)
                 yStd += pow((yArrays[i] - yAvg),2)
             }
@@ -347,7 +419,11 @@ extension  UIImage {
             xStd = sqrt(xStd)
             yStd = sqrt(yStd)
             
-            return (center: CGPointMake(CGFloat(xAvg), CGFloat(yAvg)), xStd: CGFloat(xStd), yStd: CGFloat(yStd))
+            avgRed /= posCount * 255.0
+            avgGreen /= posCount * 255.0
+            avgBlue /= posCount * 255.0
+            
+            return (center: CGPointMake(CGFloat(xAvg), CGFloat(yAvg)), xStd: CGFloat(xStd), yStd: CGFloat(yStd), color: UIColor(red: CGFloat(avgRed), green: CGFloat(avgGreen), blue: CGFloat(avgBlue), alpha: 1.0))
         } else {
             return nil
         }
