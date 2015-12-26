@@ -19,6 +19,7 @@
 		966F7AD21C2DAFE80095B847 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966F7AD11C2DAFE80095B847 /* CoreGraphics.framework */; };
 		966F7AD41C2DB4870095B847 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F7AD31C2DB4870095B847 /* UIImageExtension.swift */; };
 		966F7AD61C2DBAE40095B847 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F7AD51C2DBAE40095B847 /* UIColorExtension.swift */; };
+		966F7AD81C2E1B420095B847 /* TBCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966F7AD71C2E1B420095B847 /* TBCamera.swift */; };
 		9685E7AC1C24A32A00847227 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9685E7AB1C24A32A00847227 /* AppDelegate.swift */; };
 		9685E7B11C24A32B00847227 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7AF1C24A32B00847227 /* Main.storyboard */; };
 		9685E7B31C24A32C00847227 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9685E7B21C24A32C00847227 /* Assets.xcassets */; };
@@ -67,6 +68,7 @@
 		966F7AD11C2DAFE80095B847 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		966F7AD31C2DB4870095B847 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		966F7AD51C2DBAE40095B847 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		966F7AD71C2E1B420095B847 /* TBCamera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TBCamera.swift; sourceTree = "<group>"; };
 		9685E7A81C24A32A00847227 /* TrashBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrashBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9685E7AB1C24A32A00847227 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9685E7B01C24A32B00847227 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 				966286851C26DB7700CA3236 /* TBJavaScriptManger.swift */,
 				9613521F1C2CEB62000C88E4 /* TBFileManger.swift */,
 				969C99F11C28D0A100FF5E4F /* TBBot.swift */,
+				966F7AD71C2E1B420095B847 /* TBCamera.swift */,
 			);
 			name = TBCore;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				96DE776C1C29A76900CAE881 /* CaptureVideoPreview.swift in Sources */,
 				969C99F21C28D0A100FF5E4F /* TBBot.swift in Sources */,
 				966F7ACE1C2D74610095B847 /* MainTableViewController.swift in Sources */,
+				966F7AD81C2E1B420095B847 /* TBCamera.swift in Sources */,
 				969C99F51C28FAE500FF5E4F /* RuntimeViewController.swift in Sources */,
 				966286861C26DB7700CA3236 /* TBJavaScriptManger.swift in Sources */,
 				966F7AD61C2DBAE40095B847 /* UIColorExtension.swift in Sources */,

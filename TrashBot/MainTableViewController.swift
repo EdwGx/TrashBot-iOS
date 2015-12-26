@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 class MainTableViewController: UITableViewController, TBFileMangerDelegate {
     var newFileName: String?
@@ -18,6 +19,20 @@ class MainTableViewController: UITableViewController, TBFileMangerDelegate {
         let manger = TBFileManger.sharedManger
         manger.delegate = self
         manger.setupFileSystem()
+        
+        if AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo) == .NotDetermined {
+            AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: { (granted :Bool) -> Void in
+                if !granted {
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        let alert = UIAlertController(title: "Camera Authorization Failed", message: "Some functionalities of trash bot will be disabled", preferredStyle: .Alert)
+                        let dismiss = UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil)
+                        
+                        alert.addAction(dismiss)
+                        self.presentViewController(alert, animated: true, completion: nil)
+                    })
+                }
+            });
+        }
     }
 
     override func didReceiveMemoryWarning() {

@@ -306,6 +306,25 @@ class TBJavaScriptLoadOperation: NSOperation {
         }
         context.setObject(unsafeBitCast(stopMotors, AnyObject.self), forKeyedSubscript: "stopMotors")
         
+        //Camera
+        let camera = JSValue(newObjectInContext: context)
+        
+        let cameraSetup: @convention(block) Void -> Void = {
+            TBCamera.sharedCamera.setup()
+        }
+        camera.setObject(unsafeBitCast(cameraSetup, AnyObject.self), forKeyedSubscript: "setup")
+        
+        let cameraScan: @convention(block) String -> JSValue = { hex in
+            if let rect = TBCamera.sharedCamera.captureColorObject(hex) {
+                return JSValue(rect: rect, inContext: JSContext.currentContext())
+            } else {
+                return JSValue(nullInContext: JSContext.currentContext())
+            }
+        }
+        camera.setObject(unsafeBitCast(cameraScan, AnyObject.self), forKeyedSubscript: "scan")
+        
+        context.setObject(camera, forKeyedSubscript: "Camera")
+        
         context.evaluateScript(manger.waitFunction)
         context.evaluateScript(manger.stopGuardFunction)
         

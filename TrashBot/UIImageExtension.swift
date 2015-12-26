@@ -45,7 +45,7 @@ private extension UIImage {
         let pixelsHigh = CGImageGetHeight(inImage)
         let rect = CGRect(x:0, y:0, width:Int(pixelsWide), height:Int(pixelsHigh))
         
-        precondition(CGRectContainsPoint(rect, point), "CGPoint passed is not inside the rect of image.It will give wrong pixel and may crash.")
+        precondition(CGRectContainsPoint(rect, point), "CGPoint passed is not inside the rect of image. It will give wrong pixel and may crash.")
     }
 }
 
@@ -353,9 +353,9 @@ extension  UIImage {
         }
     }
     
-    func estimateRelativePositionForColor(color: UIColor, maxDistance: Double) -> CGPoint? {
+    func estimateRelativePositionForColor(color: UIColor, maxDistance: Double) -> CGRect? {
         if let rect = self.estimateRectForColor(color, maxDistance: maxDistance) {
-            return CGPoint(x: ((1.0 - (rect.center.y / self.size.width)) - 0.5) * 2.0, y: ((rect.center.x / self.size.height) - 0.5) * -2.0)
+            return CGRect(x: ((1.0 - (rect.center.y / self.size.width)) - 0.5) * 2.0, y: ((rect.center.x / self.size.height) - 0.5) * -2.0, width: (rect.yStd / self.size.width), height: (rect.xStd / self.size.height))
         } else {
             return nil
         }
