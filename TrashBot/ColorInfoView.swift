@@ -71,5 +71,18 @@ class ColorInfoView: UIVisualEffectView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        super.touchesEnded(touches, withEvent: event)
+        if let colorHex = label.text {
+            if colorHex != "Copied" {
+                UIPasteboard.generalPasteboard().string = colorHex[colorHex.startIndex.advancedBy(1)..<colorHex.endIndex]
+                self.label.text = "Copied"
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(UInt64(2) * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
+                    if self.label.text == "Copied" {
+                        self.label.text = colorHex
+                    }
+                })
+            }
+        }
+    }
 }
